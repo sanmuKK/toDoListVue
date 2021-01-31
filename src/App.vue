@@ -27,11 +27,13 @@ import Edit from "./components/Edit.vue";
 
 export default {
   name: "App",
+
   components: {
     Add,
     ToDo,
     Edit,
   },
+
   data() {
     return {
       toDos: [{ id: 0, msg: "单击便签编辑ToDo" }],
@@ -42,31 +44,45 @@ export default {
       toDoConnnent: "",
     };
   },
+
+  created: function () {
+    if (!localStorage.getItem("todolists"))
+      localStorage.setItem("todolists", JSON.stringify(this.toDos));
+    this.toDos = JSON.parse(localStorage.getItem("todolists"));
+  },
+
   methods: {
     addNew: function (data) {
-      if (data)
+      if (data) {
         this.toDos.push({
-          id: this.id++,
+          id: this.id,
           msg: data,
         });
-      else alert("ToDo不可为空");
+        localStorage.setItem("todolists", JSON.stringify(this.toDos));
+      } else alert("ToDo不可为空");
     },
+
     deleteToDo: function (data) {
+      localStorage.setItem("todolists", JSON.stringify(this.toDos));
       this.toDos.splice(data, 1);
       this.show = false;
     },
+
     showModal(data1, data2) {
       this.toDoConnnent = data2;
       this.ifFocus = true;
       this.editIndex = data1;
       this.show = true;
     },
+
     editToDo: function (data) {
       if (data) {
         this.toDos[this.editIndex].msg = data;
+        localStorage.setItem("todolists", JSON.stringify(this.toDos));
         this.show = false;
       } else alert("ToDo不可为空");
     },
+
     hideModal() {
       this.show = false;
     },

@@ -5,13 +5,16 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "ToDo",
+
   props: {
     msg: String,
     index: Number,
   },
+
   methods: {
     sendIndex() {
       this.$emit("getIndex", this.index, this.msg);
@@ -19,6 +22,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .tododiv {
   height: 260px;

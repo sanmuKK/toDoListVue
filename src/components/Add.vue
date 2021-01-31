@@ -10,14 +10,17 @@
     <button id="btn" class="sub" @click="add">提交</button>
   </div>
 </template>
+
 <script>
 export default {
   name: "Add",
+
   data() {
     return {
       connent: "",
     };
   },
+
   methods: {
     add() {
       this.$emit("todo", this.connent);
@@ -26,6 +29,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .sub {
   cursor: pointer;
